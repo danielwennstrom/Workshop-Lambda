@@ -46,7 +46,7 @@ public class Exercises {
     public static void exercise3(String message) {
         System.out.println(message);
 
-        List<Person> allFound = storage.findMany(p -> p.getBirthDate().isAfter(LocalDate.parse("2000-01-01")));
+        List<Person> allFound = storage.findMany(p -> p.getBirthDate().isAfter(LocalDate.parse("1999-12-31")));
 
         allFound.forEach(System.out::println);
         System.out.println("----------------------");
