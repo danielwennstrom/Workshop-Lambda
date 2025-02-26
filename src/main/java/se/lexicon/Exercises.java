@@ -20,10 +20,10 @@ public class Exercises {
     */
     public static void exercise1(String message) {
         System.out.println(message);
+
         List<Person> allFound = storage.findMany(p -> p.getFirstName().equalsIgnoreCase("Erik"));
 
         allFound.forEach(System.out::println);
-
         System.out.println("----------------------");
     }
 
@@ -32,10 +32,10 @@ public class Exercises {
      */
     public static void exercise2(String message) {
         System.out.println(message);
+
         List<Person> allFound = storage.findMany(p -> p.getGender().equals(Gender.FEMALE));
 
         allFound.forEach(System.out::println);
-
         System.out.println("----------------------");
     }
 
@@ -44,10 +44,10 @@ public class Exercises {
      */
     public static void exercise3(String message) {
         System.out.println(message);
+
         List<Person> allFound = storage.findMany(p -> p.getBirthDate().isAfter(LocalDate.parse("2000-01-01")));
 
         allFound.forEach(System.out::println);
-
         System.out.println("----------------------");
     }
 
@@ -56,8 +56,10 @@ public class Exercises {
      */
     public static void exercise4(String message) {
         System.out.println(message);
-        //Write your code here
 
+        Person found = storage.findOne(p -> p.getId() == 123);
+
+        System.out.println(found);
         System.out.println("----------------------");
     }
 
@@ -96,8 +98,19 @@ public class Exercises {
      */
     public static void exercise7(String message) {
         System.out.println(message);
-        //Write your code here
 
+        Predicate<Person> filter = p -> {
+            LocalDate today = LocalDate.now();
+            Period age = Period.between(p.getBirthDate(), today);
+            return age.getYears() < 10;
+        };
+
+        List<String> result = storage.findManyAndMapEachToString(filter, p -> {
+            Period age = Period.between(p.getBirthDate(), LocalDate.now());
+            return p.getFirstName() + " " + p.getLastName() + " " + age.getYears() + " years";
+        });
+
+        result.forEach(System.out::println);
         System.out.println("----------------------");
     }
 
