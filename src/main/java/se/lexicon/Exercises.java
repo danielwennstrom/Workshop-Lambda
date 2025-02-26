@@ -119,7 +119,11 @@ public class Exercises {
      */
     public static void exercise8(String message) {
         System.out.println(message);
-        //Write your code here
+
+        Predicate<Person> filter = p -> p.getFirstName().equals("Ulf");
+        storage.findAndDo(filter, p -> {
+            System.out.println(p.getFirstName() + " " + p.getLastName());
+        });
 
         System.out.println("----------------------");
     }
@@ -129,7 +133,11 @@ public class Exercises {
      */
     public static void exercise9(String message) {
         System.out.println(message);
-        //Write your code here
+
+        Predicate<Person> filter = p -> p.getLastName().contains(p.getFirstName());
+        storage.findAndDo(filter, p -> {
+            System.out.println(p.getFirstName() + " " + p.getLastName());
+        });
 
         System.out.println("----------------------");
     }
