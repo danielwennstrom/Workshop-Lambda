@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Exercises {
 
@@ -61,8 +63,12 @@ public class Exercises {
      */
     public static void exercise5(String message) {
         System.out.println(message);
-        //Write your code here
 
+        Predicate<Person> filter = p -> p.getId() == 456;
+        Function<Person, String> personToString = p -> "Name: " + p.getFirstName() + " " + p.getLastName() + " born " + p.getBirthDate();
+        String result = storage.findOneAndMapToString(filter, personToString);
+
+        System.out.println(result);
         System.out.println("----------------------");
     }
 
@@ -71,8 +77,12 @@ public class Exercises {
      */
     public static void exercise6(String message) {
         System.out.println(message);
-        //Write your code here
 
+        Predicate<Person> filter = p -> p.getFirstName().startsWith("E");
+        Function<Person, String> personToString = p -> "Name: " + p.getFirstName() + " " + p.getLastName();
+        List<String> result = storage.findManyAndMapEachToString(filter, personToString);
+
+        result.forEach(System.out::println);
         System.out.println("----------------------");
     }
 
