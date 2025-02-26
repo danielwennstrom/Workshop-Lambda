@@ -22,8 +22,7 @@ public class Exercises {
         System.out.println(message);
         List<Person> allFound = storage.findMany(p -> p.getFirstName().equalsIgnoreCase("Erik"));
 
-        for (Person p : allFound)
-            System.out.println(p);
+        allFound.forEach(System.out::println);
 
         System.out.println("----------------------");
     }
@@ -32,7 +31,10 @@ public class Exercises {
         2.	TODO: Find all females in the collection using findMany().
      */
     public static void exercise2(String message) {
-        //Write your code here
+        System.out.println(message);
+        List<Person> allFound = storage.findMany(p -> p.getGender().equals(Gender.FEMALE));
+
+        allFound.forEach(System.out::println);
 
         System.out.println("----------------------");
     }
@@ -42,7 +44,9 @@ public class Exercises {
      */
     public static void exercise3(String message) {
         System.out.println(message);
-        //Write your code here
+        List<Person> allFound = storage.findMany(p -> p.getBirthDate().isAfter(LocalDate.parse("2000-01-01")));
+
+        allFound.forEach(System.out::println);
 
         System.out.println("----------------------");
     }
