@@ -150,7 +150,13 @@ public class Exercises {
     public static void exercise10(String message) {
         System.out.println(message);
 
+        Predicate<Person> filter = p -> p.getFirstName().toLowerCase()
+                .contentEquals(new StringBuilder(p.getFirstName().toLowerCase())
+                        .reverse());
 
+        storage.findAndDo(filter, p -> {
+            System.out.println(p.getFirstName() + " " + p.getLastName());
+        });
 
         System.out.println("----------------------");
     }
