@@ -4,6 +4,7 @@ import se.lexicon.model.Person;
 import se.lexicon.util.PersonGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -46,36 +47,64 @@ public class DataStorageImpl implements DataStorage {
 
     @Override
     public Person findOne(Predicate<Person> filter) {
-        // TODO: needs completion
+        Person result;
+        for (Person p : personList)
+            if (filter.test(p)) {
+                result = p;
+                return result;
+            }
+
         return null;
     }
 
     @Override
     public String findOneAndMapToString(Predicate<Person> filter, Function<Person, String> personToString) {
-        // TODO: needs completion
+        for (Person p : personList)
+            if (filter.test(p)) {
+                return personToString.apply(p);
+            }
+
         return null;
     }
 
     @Override
     public List<String> findManyAndMapEachToString(Predicate<Person> filter, Function<Person, String> personToString) {
-        // TODO: needs completion
-        return null;
+        List<String> personToList = new ArrayList<>();
+
+        for (Person p : personList)
+            if (filter.test(p)) {
+                personToList.add(personToString.apply(p));
+            }
+
+        return personToList;
     }
 
     @Override
     public void findAndDo(Predicate<Person> filter, Consumer<Person> consumer) {
-        // TODO: needs completion
+        for (Person p : personList)
+            if (filter.test(p)) {
+                consumer.accept(p);
+            }
     }
 
     @Override
     public List<Person> findAndSort(Comparator<Person> comparator) {
-        // TODO: needs completion
-        return null;
+        personList.sort(comparator);
+
+        return personList;
     }
 
     @Override
     public List<Person> findAndSort(Predicate<Person> filter, Comparator<Person> comparator) {
-        // TODO: needs completion
-        return null;
+        List<Person> filteredList = new ArrayList<>();
+
+        for (Person p : personList)
+            if (filter.test(p)) {
+                filteredList.add(p);
+            }
+
+        filteredList.sort(comparator);
+
+        return filteredList;
     }
 }
