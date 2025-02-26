@@ -7,6 +7,7 @@ import se.lexicon.model.Person;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Comparator;
+import java.util.List;
 
 public class Exercises {
 
@@ -17,7 +18,10 @@ public class Exercises {
     */
     public static void exercise1(String message) {
         System.out.println(message);
-        //Write your code here
+        List<Person> allFound = storage.findMany(p -> p.getFirstName().equalsIgnoreCase("Erik"));
+
+        for (Person p : allFound)
+            System.out.println(p);
 
         System.out.println("----------------------");
     }
